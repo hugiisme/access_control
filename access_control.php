@@ -1,6 +1,7 @@
 <?php 
     function isAllowed($user_id, $action, $resource_id, $org_id){
         // return true/false
+        // return luôn nếu tìm thấy action yêu cầu tồn tại thay vì phải query hết như action list
     }
 
     function allowedActionList($conn, $user_id, $resource_id, $org_id){
@@ -10,12 +11,26 @@
             return [];
         }
 
+        // Bước 1: check policy 
+        // Skip
+
+        // Bước 2: check system role
+        // TODO: thiếu ràng buộc về tổ chức, hiện tại nếu system role có quyền edit hoạt động = quyền edit hoạt động toàn hệ thống thay vì chỉ trong tổ chức của bản thân
+        $systemRoleQuery = "SELECT sr.name
+                        FROM system_roles sr
+                        JOIN user_system_roles usr ON ";
+        // getActionFromSystemRole($conn, $system_role, $resource_type);
+
+        // Bước 3: check resource_role
+
+        // Bước 4: check resource_relation
+
         return $allowedActions;
         // return [read, view,...]
     }
 
     function getActionFromPolicy(){
-
+        // Tạm skip
     }
 
     function getActionFromSystemRole($conn, $system_role, $resource_type){
@@ -36,9 +51,7 @@
     }
 
     function getActionFromResourceRole($conn, $resource_role){
-        // TODO: Chưa query về role kế thừa
-        $contained = [];
-        
+        // TODO: Chưa query về role kế thừa        
         $contained = getAllContainedRoles($conn, $resource_role);
         $contained[] = $resource_role;
 

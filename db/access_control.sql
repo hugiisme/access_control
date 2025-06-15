@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 15, 2025 at 12:19 AM
+-- Generation Time: Jun 15, 2025 at 06:30 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 7.4.33
 
@@ -862,6 +862,18 @@ CREATE TABLE `resource_role_relations` (
   `resource_role_2_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Quan hệ giữa vai trò và loại quan hệ tài nguyên';
 
+--
+-- Dumping data for table `resource_role_relations`
+--
+
+INSERT INTO `resource_role_relations` (`id`, `resource_role_1_id`, `relation_type`, `resource_role_2_id`) VALUES
+(7, 1, 'contains', 3),
+(8, 1, 'contains', 4),
+(9, 3, 'contains', 2),
+(10, 5, 'contains', 4),
+(11, 6, 'contains', 2),
+(12, 7, 'contains', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -1141,7 +1153,6 @@ ALTER TABLE `resource_role_actions`
 --
 ALTER TABLE `resource_role_relations`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `uk_resource_role_relation` (`resource_role_1_id`,`relation_type`),
   ADD KEY `relation_type_id` (`relation_type`),
   ADD KEY `resource_role_2_id` (`resource_role_2_id`);
 
@@ -1280,7 +1291,7 @@ ALTER TABLE `resource_role_actions`
 -- AUTO_INCREMENT for table `resource_role_relations`
 --
 ALTER TABLE `resource_role_relations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `resource_types`
